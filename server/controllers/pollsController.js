@@ -344,6 +344,14 @@ exports.removeVote = async (req, res) => {
             })
         }
 
+        // Socket IO Live Update Task
+        req.io.emit("homepage-update", {
+            success: true,
+            type: 'update',
+            message: "Io homepage-update received",
+            data: poll
+        })
+
         req.io.emit(`${pollId}-poll-update`, {
             success: true,
             message: `Io ${pollId}-poll-update received from '/removeVote`,
