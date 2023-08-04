@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 
 const RenderPollData = ({ poll, handleOptionChange, handleVote, handleRemoveVote, selectedOption, isVoted, isOwner, handleDeletePoll, handleEditPoll }) => {
-    
+
     return (
         <div className='flex flex-wrap flex-col md:flex-row justify-between gap-y-11'>
 
@@ -34,8 +34,7 @@ const RenderPollData = ({ poll, handleOptionChange, handleVote, handleRemoveVote
                             ?
                             <button
                                 onClick={handleVote}
-                                disabled={!selectedOption}
-                                className={`bg-blue-500 w-full text-white py-2 px-4 rounded ${selectedOption ? 'hover:bg-blue-600' : 'cursor-not-allowed'}`}
+                                className={`bg-blue-500 w-full text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-200`}
                             >
                                 Submit Your Vote
                             </button>

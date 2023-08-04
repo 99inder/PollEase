@@ -6,6 +6,7 @@ import { setEditPollFlag, setEditPollData } from '../redux/slices/editPollSlice'
 import RenderPollStats from '../components/core/RequiredPoll/RenderPollStats';
 import RenderPollData from '../components/core/RequiredPoll/RenderPollData';
 import Spinner from '../components/common/Spinner';
+import { toast } from 'react-hot-toast';
 
 const RequiredPoll = ({ socket }) => {
 
@@ -39,7 +40,6 @@ const RequiredPoll = ({ socket }) => {
         // Fetch poll details from the backend using pollId
         (async () => {
             const response = await fetchRequiredPoll(pollId);
-            console.log(response?.data);
 
             if (!response?.success)
                 return;
@@ -60,17 +60,27 @@ const RequiredPoll = ({ socket }) => {
     }, [pollId]);
 
     const handleOptionChange = (optionId) => {
-        setSelectedOption(optionId);
+        if (isVoted) {
+            toast.error("Already Voted. Remove your vote first.");
+            return ;
+        }
+        if (selectedOption === optionId)
+            setSelectedOption('');
+        else
+            setSelectedOption(optionId);
     };
 
     const handleVote = async () => {
+        if (!selectedOption) {
+            toast.error("No Option Selected");
+            return;
+        }
         const response = await castVote(poll._id, selectedOption, token, navigate);
 
         if (!response?.success)
             return;
 
         setIsVoted(true);
-        console.log(response);
     };
 
     const handleDeletePoll = async () => {
@@ -83,7 +93,6 @@ const RequiredPoll = ({ socket }) => {
 
     const handleRemoveVote = async () => {
         const response = await removeVote(poll._id, token);
-        console.log("handleRemoveVote>>>", response);
 
         if (!response?.success)
             return;

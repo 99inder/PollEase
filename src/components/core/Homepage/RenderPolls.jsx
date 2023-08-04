@@ -64,7 +64,7 @@ const RenderPolls = ({ socket }) => {
 
     socket?.on("homepage-update", (response) => {
 
-        console.log("Socket Trigerred");
+        // console.log("Socket Trigerred");
 
         if (response?.type === 'update') {
             handleLivePollUpdate(response);
