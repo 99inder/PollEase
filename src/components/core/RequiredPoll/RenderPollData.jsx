@@ -14,7 +14,7 @@ const RenderPollData = ({ poll, handleOptionChange, handleVote, handleRemoveVote
                         <div className={` bg-white px-3 py-4 ${option._id === selectedOption ? "border-caribbeangreen-200 border-[2px] shadow-caribbeangreen-100 translate-x-2" : "shadow-richblack-200"}  rounded-md shadow-lg transition-all duration-200`}>
                             <div className='flex justify-between text-2xl font-bold'>
                                 <p>{option.text}</p>
-                                <p>{`${poll.totalVotes === 0 ? 0 : (option.votes / poll.totalVotes) * 100}`} %</p>
+                                <p>{`${poll.totalVotes === 0 ? 0 : Math.round((option.votes / poll.totalVotes) * 100)}`} %</p>
                             </div>
                             <div className='my-3 h-2'>
                                 <HorizontalProgressBar showPercentage={false} percentage={`${poll.totalVotes === 0 ? 0 : Math.round((option.votes / poll.totalVotes) * 100)}`} />
