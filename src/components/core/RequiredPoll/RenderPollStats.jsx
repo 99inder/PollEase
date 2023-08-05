@@ -6,7 +6,7 @@ const RenderPollStats = ({ poll }) => {
             <div className="mt-2 flex justify-evenly flex-wrap gap-y-5">
                 {poll.options.map((option) => (
                     <div key={option._id} className="mb-2 flex flex-col items-center gap-y-4">
-                        <CircularProgressBar percentage={`${poll.totalVotes === 0 ? 0 : (option.votes / poll.totalVotes) * 100}`} />
+                        <CircularProgressBar percentage={`${poll.totalVotes === 0 ? 0 : Math.round((option.votes / poll.totalVotes) * 100)}`} />
                         <div className='text-center'>
                             <p className="font-bold">{option.text}</p>
                             <p className='text-sm font-medium'>{option.votes} vote(s)</p>

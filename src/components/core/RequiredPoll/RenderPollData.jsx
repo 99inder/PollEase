@@ -17,7 +17,7 @@ const RenderPollData = ({ poll, handleOptionChange, handleVote, handleRemoveVote
                                 <p>{`${poll.totalVotes === 0 ? 0 : (option.votes / poll.totalVotes) * 100}`} %</p>
                             </div>
                             <div className='my-3 h-2'>
-                                <HorizontalProgressBar showPercentage={false} percentage={`${poll.totalVotes === 0 ? 0 : (option.votes / poll.totalVotes) * 100}`} />
+                                <HorizontalProgressBar showPercentage={false} percentage={`${poll.totalVotes === 0 ? 0 : Math.round((option.votes / poll.totalVotes) * 100)}`} />
                             </div>
                             <div className='text-richblack-300 font-semibold'>
                                 <p>{option?.votes} Vote(s)</p>
